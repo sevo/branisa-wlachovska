@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width">
+<script type="text/javascript" async 
+       src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_CHTML"></script>
+<style>
+       .question-text 
+            {font-size: 20px;
+             word-wrap: break-word;
+             vertical-align: top;
+             text-align: justify;
+             padding-left: 10px;
+             padding-right: 10px;}  
+        
+        .b-color
+            {background-color:#CACACA; }
+        
+        .image 
+            {max-width: 100%;
+             display: block;
+             margin-top: 10px;
+             margin-bottom: 10px;
+             margin-left: auto;
+             margin-right: auto;} 
+        
+        .instructions 
+            {font-size: 15px;
+             word-wrap: break-word;
+             vertical-align: top;
+             font-weight: 700; }
+            
+        .right
+            {float: right;
+             width: 15%;}
+             
+        .center
+            {text-align: center;}
+             
+        .column
+            {float: left;
+             display: inline-block;
+             word-wrap: break-word;
+             vertical-align: top;
+             background-color: #CACACA;}
+        
+        table 
+            {border: none;
+             width: 100%;}
+
+            table td 
+                {width: 50%;
+                 word-wrap: break-word;
+                 background-color: #CACACA;
+                 border: none;
+                 vertical-align: top;}
+ 
+</style>
+
+</head>
+<body class="b-color">
+    <form action="/" method = "post">
+  
+  <table>  
+     <tr>
+        <img class="image" src="https://chemistry-studio.com/wp-content/uploads/logo_chemistry_1024_RGB.png" style="width: 50%"/>
+        <input type="submit" name="btn" value="Resetuje otazky" />
+        <span class="instructions"><center>
+        {% if uvod %}
+        Zvol spravne odpovede. Skontroluj svoje odpovede kliknutim na tlacitko kontrola.
+        {% endif %}
+        </center></span>
+  
+	      <h1 class="question-text">{{ otazka }}</h1>
+      </tr>
+      <tr>
+	      <td class="right">
+           <input type="submit" name="btn" value="Nova otazka" />
+        </td>
+        <td>
+	         <input type="submit" name="btn" value="Kontrola" />
+           </td>
+      </tr>
+      <tr>
+	      <h1 class="question-text center">{{ control }} <br />{{ odp }}</h1>
+      </tr>
+      <tr>
+         <h1 class="question-text center">{{ bdy }} otaz{{ sklonovanie }} mas spravne</h1>
+      </tr>
+      <tr> 
+        <div class="column" style="padding-left: 35%"><h1> A <input type="checkbox" name="A" value="A"/></div>  
+        <div class="column"><h1> B <input type="checkbox" name="B" value="B"/></div>
+        <div class="column"><h1> C <input type="checkbox" name="C" value="C"/></div>
+	      <div class="column"><h1> D <input type="checkbox" name="D" value="D"/></div>
+	      <div class="column"><h1> E <input type="checkbox" name="E" value="E"/></div>
+	      <div class="column"><h1> F <input type="checkbox" name="F" value="F"/></div>
+	      <div class="column"><h1> G <input type="checkbox" name="G" value="G"/></div>
+	      <div class="column" style="padding-right: 20%"><h1> H <input type="checkbox" name="H" value="H"/></div>
+      </tr>   
+  </table>
+    </form>
+    {% with messages = get_flashed_messages() %}
+	{% if messages %}
+	   Results:
+	   <pre>
+		{% for message in messages %}
+{{message}}
+		{% endfor %}
+	   </pre>
+	{% endif %}
+   {% endwith %}
+
+
+</body>
+</
