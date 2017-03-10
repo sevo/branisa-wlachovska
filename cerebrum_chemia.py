@@ -13,7 +13,6 @@ app = flask.Flask(__name__)
 moja = []
 ID = []
 otazka = []
-pismenka = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
 dic = {'od': 0, 'ot': 0, 'body': 0, 'sklonovanie':'ok', 'userID': 'xyz', 'listotazok':0, 'ypsilon': None}
 uvod = 'Zvol spravne odpovede. Skontroluj svoje odpovede kliknutim na tlacitko kontrola.'
 
