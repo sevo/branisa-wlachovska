@@ -1,1 +1,1 @@
-web: python cerebrum_chemia.py
+web: gunicorn manage:app
