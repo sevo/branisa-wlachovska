@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width">
-<script type="text/javascript" async 
-       src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_CHTML"></script>
+<script type="text/javascript" 
+        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <style>
        .question-text 
             {font-size: 20px;
@@ -29,10 +29,6 @@
              word-wrap: break-word;
              vertical-align: top;
              font-weight: 700; }
-            
-        .right
-            {float: right;
-             width: 15%;}
              
         .center
             {text-align: center;}
@@ -42,14 +38,15 @@
              display: inline-block;
              word-wrap: break-word;
              vertical-align: top;
-             background-color: #CACACA;}
+             background-color: #CACACA;
+             padding: 5px;}
         
         table 
             {border: none;
              width: 100%;}
 
             table td 
-                {width: 50%;
+                {width: 47%;
                  word-wrap: break-word;
                  background-color: #CACACA;
                  border: none;
@@ -64,22 +61,25 @@
   <table>  
      <tr>
         <img class="image" src="https://chemistry-studio.com/wp-content/uploads/logo_chemistry_1024_RGB.png" style="width: 50%"/>
-        <input type="submit" name="btn" value="Resetuje otazky" />
         <span class="instructions"><center>
         {% if uvod %}
         Zvol spravne odpovede. Skontroluj svoje odpovede kliknutim na tlacitko kontrola.
         {% endif %}
         </center></span>
+        <input type="submit" name="btn" value="Zmena mena" />
   
 	      <h1 class="question-text">{{ otazka }}</h1>
       </tr>
       <tr>
-	      <td class="right">
-           <input type="submit" name="btn" value="Nova otazka" />
+	      <td style="padding-left: 530px">
+           <center><input type="submit" name="btn" value="Nova otazka" /></center>
         </td>
-        <td>
-	         <input type="submit" name="btn" value="Kontrola" />
-           </td>
+        <td style="width: 5%">
+	         <center><input type="submit" name="btn" value="Kontrola" /></center>
+        </td>
+        <td  style="padding-right: 530px">
+           <input type="submit" name="btn" value="Resetuje otazky" />
+        </td>
       </tr>
       <tr>
 	      <h1 class="question-text center">{{ control }} <br />{{ odp }}</h1>
@@ -88,14 +88,14 @@
          <h1 class="question-text center">{{ bdy }} otaz{{ sklonovanie }} mas spravne</h1>
       </tr>
       <tr> 
-        <div class="column" style="padding-left: 35%"><h1> A <input type="checkbox" name="A" value="A"/></div>  
-        <div class="column"><h1> B <input type="checkbox" name="B" value="B"/></div>
-        <div class="column"><h1> C <input type="checkbox" name="C" value="C"/></div>
-	      <div class="column"><h1> D <input type="checkbox" name="D" value="D"/></div>
-	      <div class="column"><h1> E <input type="checkbox" name="E" value="E"/></div>
-	      <div class="column"><h1> F <input type="checkbox" name="F" value="F"/></div>
-	      <div class="column"><h1> G <input type="checkbox" name="G" value="G"/></div>
-	      <div class="column" style="padding-right: 20%"><h1> H <input type="checkbox" name="H" value="H"/></div>
+        <div class="column" style="padding-left: 500px"><h1> A <br /><input type="checkbox" name="A" value="A"/></div>  
+        <div class="column"><h1> B <br /><input type="checkbox" name="B" value="B"/></div>
+        <div class="column"><h1> C <br /><input type="checkbox" name="C" value="C"/></div>
+	      <div class="column"><h1> D <br /><input type="checkbox" name="D" value="D"/></div>
+	      <div class="column"><h1> E <br /><input type="checkbox" name="E" value="E"/></div>
+	      <div class="column"><h1> F <br /><input type="checkbox" name="F" value="F"/></div>
+	      <div class="column"><h1> G <br /><input type="checkbox" name="G" value="G"/></div>
+	      <div class="column" style="padding-right: 500px"><h1> H <br /><input type="checkbox" name="H" value="H"/></div>
       </tr>   
   </table>
     </form>

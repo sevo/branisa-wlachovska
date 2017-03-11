@@ -13,7 +13,7 @@ app = flask.Flask(__name__)
 moja = []
 ID = []
 otazka = []
-dic = {'od': 0, 'ot': 0, 'body': 0, 'sklonovanie':'ok', 'userID': 'xyz', 'listotazok':0, 'ypsilon': None}
+dic = {'od': 0, 'ot': 0, 'body': 0, 'sklonovanie':'ok', 'userID': None, 'listotazok':0, 'ypsilon': None}
 uvod = 'Zvol spravne odpovede. Skontroluj svoje odpovede kliknutim na tlacitko kontrola.'
 
 class View(flask.views.MethodView):
@@ -21,9 +21,8 @@ class View(flask.views.MethodView):
         dic['userID'] = ''
         if request.cookies.get('nameID') == None:
             randommeno = str(uuid.uuid4())
+            dic['userID'] = randommeno
             dic['listotazok'] = list(range(1, 5 + 1))
-            dic['userID'] = uuid.uuid4()
-            print('vypise list2',dic['listotazok'])
             pole = (dic['userID'], dic['listotazok'])
             print('toto vypise pole v newUSER',pole)
             respond = make_response(render_template('layout.html', uvod = True, bdy = dic['body'], sklonovanie = dic['sklonovanie']).encode('utf-8'))
@@ -35,7 +34,7 @@ class View(flask.views.MethodView):
             pole1 = json.loads(kokie)
             pole2 = pole1[:1]
             pole3 = str(pole2)
-            pole4 = pole3[2:38]
+            pole4 = pole3[2:-2]
             print('cookie pola', pole4)
             dic['userID'] = pole4
             lstpole2 = pole1[1:3]
@@ -53,7 +52,7 @@ class View(flask.views.MethodView):
         if request.form['btn'] == 'Nova otazka':
             print('kookie',request.cookies.get('nameID', dic['listotazok']))
             print('list', dic['listotazok'])
-            if len(dic['listotazok']) == 0:
+            if len(list(dic['listotazok'])) == 0:
                 return flask.render_template('layout.html', control='Nemame otazky', bdy = dic['body'], sklonovanie = dic['sklonovanie'])
             else:
                 y = random.choice(dic['listotazok'])
@@ -103,22 +102,24 @@ class View(flask.views.MethodView):
             a = dic['od']
             a = a.replace(',','')
             lst = list(a)
-            print('moja', moja, 'od', lst)
+            print('moja', moja, 'od', lst)    
             
             if list(moja) == lst:
-                
-                dic['body'] += 1
-                if dic['body'] == 1:
-                    dic['sklonovanie']='ku'
-                if dic['body'] == 2 or dic['body'] == 3 or dic['body'] == 4:
-                    dic['sklonovanie']='ky'
-                if dic['body'] >= 5:
-                    dic['sklonovanie']='ok'
                 moja[:]=[]
                 kokie = request.cookies.get('nameID') 
-                dic['listotazok'].remove(dic['ypsilon'])
+                try:
+                    dic['listotazok'].remove(dic['ypsilon'])
+                except ValueError:
+                    pass
                 pole = (dic['userID'], dic['listotazok'])
                 print('toto vypise pole', pole)
+                dic['body'] = 5 - len(dic['listotazok'])
+                if dic['body'] == 1:
+                    dic['sklonovanie']='ku'
+                elif dic['body'] == 2 or dic['body'] == 3 or dic['body'] == 4:
+                    dic['sklonovanie']='ky'
+                elif dic['body'] >= 5:
+                    dic['sklonovanie']='ok'
                 respond = make_response(flask.render_template('layout.html', control = 'Vyborne, spravna odpoved!', bdy = dic['body'], sklonovanie = dic['sklonovanie']))
                 respond.set_cookie('nameID', json.dumps(pole))
                 return respond
@@ -132,11 +133,12 @@ class View(flask.views.MethodView):
             dic['listotazok'] = list(range(1, 5 + 1))
             pole = (dic['userID'], dic['listotazok'])
             print('toto vypise pole', pole)
-            respond = make_response(flask.render_template('layout.html', control = 'List otazok sa zresetoval.', bdy = dic['body']))
+            dic['sklonovanie']='ok'
+            dic['body'] = 0
+            respond = make_response(flask.render_template('layout.html', control = 'List otazok sa zresetoval.', bdy = dic['body'], sklonovanie = dic['sklonovanie']))
             respond.set_cookie('nameID', json.dumps(pole))
             return respond
-            
-                                
+
 app.add_url_rule('/', view_func=View.as_view('main'), methods=['GET', 'POST'])
 app.debug = True
 app.run()
