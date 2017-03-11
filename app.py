@@ -108,10 +108,8 @@ def post():
                 moja.append('h')
 
         kont()
-        a = 0
         a = dic['od']
-        a = a.replace(',', '')
-        lst = list(a)
+        lst = str(a).split(',')
         print('moja', moja, 'od', lst)
 
         if list(moja) == lst:
