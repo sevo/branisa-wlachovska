@@ -1,1 +1,1 @@
-web: gunicorn cerebrum_chemia:app --log-file=-
+web: gunicorn cerebrum_chemia:app
