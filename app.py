@@ -18,7 +18,7 @@ dic = {'od': 0, 'ot': 0, 'body': 0, 'sklonovanie':'ok', 'userID': None, 'listota
 uvod = 'Zvol spravne odpovede. Skontroluj svoje odpovede kliknutim na tlacitko kontrola.'
 
 @app.route('/', methods=['GET'])
-def get(self):
+def get():
     dic['userID'] = ''
     if request.cookies.get('nameID') == None:
         randommeno = str(uuid.uuid4())
@@ -55,7 +55,7 @@ def get(self):
 
 
 @app.route('/', methods=['POST'])
-def post(self):
+def post():
     if request.form['btn'] == 'Nova otazka':
         print('kookie', request.cookies.get('nameID', dic['listotazok']))
         print('list', dic['listotazok'])
